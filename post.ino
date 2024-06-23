@@ -19,12 +19,12 @@ const int rs = 3, en = 15, d4 = 16, d5 = 5, d6 = 4, d7 = 1;
 
 MFRC522 rfid(pin_ss,pin_reset);
 
-const char* ssid = "CAROLIN3";          // Ganti dengan nama SSID WiFi Anda
-const char* password = "123456789";  // Ganti dengan password WiFi Anda
+const char* ssid = "WIFI_SSID";          // Ganti dengan nama SSID WiFi Anda
+const char* password = "WIFI_PASSWORD";  // Ganti dengan password WiFi Anda
 
-// const char* serverName = "http://192.168.137.1:1211/api/ListMahasiswa/InsertData"; // Ganti dengan URL API Anda
-const char* ServerNameAbsen = "http://52.64.235.179:1211/api/ListAbsen/InsertData"; // Ganti dengan URL API Anda
-const char* ServerNameAkun = "http://52.64.235.179:1211/api/ListMahasiswa/InsertData"; // Ganti dengan URL API Anda
+// const char* serverName = "http://localhost:1211/api/ListMahasiswa/InsertData"; // Ganti dengan URL API Anda
+const char* ServerNameAbsen = "http://localhost:1211/api/ListAbsen/InsertData"; // Ganti dengan URL API Anda
+const char* ServerNameAkun = "http://localhost:1211/api/ListMahasiswa/InsertData"; // Ganti dengan URL API Anda
 
 void setup() {
   Serial.begin(115200);
