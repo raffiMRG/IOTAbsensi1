@@ -11,13 +11,15 @@
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 int input_status = 0;
 
+const int myPin = D8;
+
 String mac;
 byte buffer1[18];
 const int rs = 3, en = 15, d4 = 16, d5 = 5, d6 = 4, d7 = 1;
 
 MFRC522 rfid(pin_ss,pin_reset);
 
-const char* ssid = "CAROLINE";          // Ganti dengan nama SSID WiFi Anda
+const char* ssid = "CAROLIN3";          // Ganti dengan nama SSID WiFi Anda
 const char* password = "123456789";  // Ganti dengan password WiFi Anda
 
 // const char* serverName = "http://192.168.137.1:1211/api/ListMahasiswa/InsertData"; // Ganti dengan URL API Anda
@@ -26,6 +28,7 @@ const char* ServerNameAkun = "http://52.64.235.179:1211/api/ListMahasiswa/Insert
 
 void setup() {
   Serial.begin(115200);
+  pinMode(myPin, OUTPUT);
   // RFID & LCD INIT START
   SPI.begin();    
   rfid.PCD_Init();   
@@ -100,12 +103,18 @@ void input_rrfid(const char* serverName){
 void loop() {
   if (WiFi.status() == WL_CONNECTED) {
     if (input_status == 1 && rfid.PICC_IsNewCardPresent()){
+      digitalWrite(myPin, HIGH);
       input_rrfid(ServerNameAbsen);
-      delay(2000);
+      delay(500);
+      digitalWrite(myPin, LOW);
+      delay(1500);
     }else if(input_status != 1 && rfid.PICC_IsNewCardPresent()){
+      digitalWrite(myPin, HIGH);
       input_rrfid(ServerNameAkun);
       input_status = 1;
-      delay(2000);
+      delay(500);
+      digitalWrite(myPin, LOW);
+      delay(1500);
     }
   } else {
     Serial.println("WiFi Disconnected");
